@@ -1,6 +1,7 @@
 # Created by https://www.toptal.com/developers/gitignore/api/python,django,virtualenv,venv
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,django,virtualenv,venv
 
+images/
 ### Django ###
 *.log
 *.pot
