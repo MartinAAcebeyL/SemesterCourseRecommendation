@@ -10,4 +10,7 @@ class Materias(models.Model):
     creditos = models.IntegerField()
     # relacion recursiva
     pre_requisitos = models.ForeignKey(
-        'self', null=False, on_delete=models.CASCADE, related_name='materias')
+        'self', blank=True, null=True, on_delete=models.CASCADE, related_name='materias')
+
+    def __str__(self) -> str:
+        return self.sigla
