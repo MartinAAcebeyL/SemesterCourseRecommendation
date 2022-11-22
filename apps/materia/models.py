@@ -9,8 +9,9 @@ class Materias(models.Model):
     curso = models.IntegerField()
     creditos = models.IntegerField()
     # relacion recursiva
-    pre_requisitos = models.ForeignKey(
-        'self', blank=True, null=True, on_delete=models.CASCADE, related_name='materias')
+    pre_requisitos = models.ManyToManyField(
+        'self', blank=True,
+        symmetrical=False, related_name='materias')
 
     def __str__(self) -> str:
         return self.sigla
