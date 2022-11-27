@@ -5,9 +5,10 @@ from .models import Materias
 
 
 class MateriasAdmin(admin.ModelAdmin):
-    pass
-    # fields = ('title', 'description', 'price')
-    # list_display = ('__str__', 'slug', 'date')
+
+    # fields = ('nombre', 'sigla', 'curso', 'creditos', 'pre_requisitos')
+
+    list_display = ('sigla', 'nombre', 'curso', 'tipo', 'creditos')
 
 
 admin.site.register(Materias, MateriasAdmin)

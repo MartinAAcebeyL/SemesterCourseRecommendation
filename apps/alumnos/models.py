@@ -6,8 +6,8 @@ from apps.horarios.models import Horarios
 
 # Create your models here.
 
+
 class Alumnos(Usuarios):
-    pass
     kardex = models.OneToOneField(
         Kadex,
         on_delete=models.CASCADE,

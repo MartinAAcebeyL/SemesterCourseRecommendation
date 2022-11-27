@@ -1,24 +1,26 @@
 from django.db import models
-
+from apps.materia.models import Materias
 # Create your models here.
-
-# plan=models.enums.
 
 
 class Kadex(models.Model):
-    gestion = models.IntegerField()
-    plan = models.IntegerField()
-    curso = models.IntegerField()
-    sigla = models.CharField(max_length=150)
-    nombre_materia = models.CharField(max_length=150)
-    final = models.IntegerField()
-    segunda_instancia = models.IntegerField()
+    class Gestion(models.IntegerChoices):
+        primero = 1, 'primero'
+        segundo = 2, 'Reprobado'
 
     class EstadoMateria(models.TextChoices):
         aprobado = 'ap', 'Aprobado'
         reprobado = 'rp', 'Reprobado'
         convalidado = 'co', 'Convalidado'
 
+    anio = models.IntegerField(null=True, blank=True)
+    gestion = models.IntegerField(
+        default=Gestion.primero, choices=Gestion.choices)
+    plan = models.IntegerField(default=1)
+    final = models.IntegerField()
+    segunda_instancia = models.IntegerField(null=True,blank=True)
     estado = models.CharField(max_length=2,
                               choices=EstadoMateria.choices,
                               default=EstadoMateria.aprobado)
+
+    materias = models.ManyToManyField(Materias)

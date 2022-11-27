@@ -5,9 +5,9 @@ from .models import Alumnos
 
 
 class AlumnosAdmin(admin.ModelAdmin):
-    pass
-    # fields = ('title', 'description', 'price')
-    # list_display = ('__str__', 'slug', 'date')
+    fields = ('name', 'last_name', 'phone', 'email',
+              'password', 'address', 'kardex', 'carrera')
+    list_display = ('email', 'name', 'carrera')
 
 
 admin.site.register(Alumnos, AlumnosAdmin)
