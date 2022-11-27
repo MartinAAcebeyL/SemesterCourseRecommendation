@@ -17,7 +17,7 @@ class Horarios(models.Model):
                             default=TipoMateria.teoria)
 
     # llaves foreneas
-    decente = models.ForeignKey(
+    docente = models.ForeignKey(
         Docentes, on_delete=models.CASCADE, related_name='horarios')
 
 

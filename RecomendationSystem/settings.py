@@ -49,7 +49,8 @@ INSTALLED_APPS = [
     'apps.carreras',
     'apps.horarios',
     'apps.kardex',
-    'apps.materia'
+    'apps.materia',
+    'apps.calificaciones'
 ]
 
 MIDDLEWARE = [
