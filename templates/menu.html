@@ -3,9 +3,9 @@
   <header>
     <img src="{% static 'images/estudiante1.jpg' %}" alt="estudiante" />
     <div>
-      <span><b>Nombre estudiante</b></span
+      <span><b>{{user.name}}</b></span
       ><br />
-      <span>Nombre carrera</span>
+      <span>{{user.carrera.nombre}}</span>
     </div>
   </header>
   <p>Navegacion principal</p>

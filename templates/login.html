@@ -23,6 +23,9 @@
             id="password"
             placeholder="Contrasena"
           />
+          {%if error%}
+          <p style="color: red; margin: 0">{{error}}</p>
+          {% endif %}
           <input type="submit" value="Ingresar" />
         </form>
         <p><a href="">Olvidé mi contraseña</a></p>

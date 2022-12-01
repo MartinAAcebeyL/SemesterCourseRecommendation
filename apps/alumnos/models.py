@@ -15,4 +15,10 @@ class Alumnos(Usuarios):
     )
     carrera = models.ForeignKey(
         Carreras, on_delete=models.CASCADE, related_name='alumnos')
+    
     horarios = models.ManyToManyField(Horarios)
+
+    @classmethod
+    def get_by_email(self, email):
+        alumno = Alumnos.objects.get(email=email)
+        return alumno
