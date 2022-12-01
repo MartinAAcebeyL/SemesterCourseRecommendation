@@ -1,15 +1,15 @@
-:root{
-    --font-color:rgb(210, 214, 222);
-    --gray-color:#747270;
+:root {
+    --font-color: rgb(210, 214, 222);
+    --gray-color: #747270;
     --blue-color: #367FA9;
 }
 
-*{
+* {
     box-sizing: border-box;
     font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-body{
+body {
     margin: 0;
     min-height: 100vh;
     display: flex;
@@ -28,39 +28,39 @@ h2 {
     letter-spacing: .2rem;
 }
 
-footer{
+footer {
     margin-top: 2rem;
     display: flex;
     justify-content: space-around;
 }
 
-#content{
+#content {
     width: 20%;
 }
 
-.form{
+.form {
     background-color: white;
     padding: 1rem 1.5rem;
     padding-top: .3rem;
     border-radius: .6rem;
 }
 
-.iver{
+.iver {
     font-weight: normal !important;
     font-size: 1.4rem;
 }
 
-.form p{
+.form p {
     font-size: .75rem;
     color: var(--gray-color);
 }
 
-.form > :first-child{
+.form> :first-child {
     padding-top: .4rem;
     margin-bottom: 1.2rem;
 }
 
-.form form  input{
+.form form input {
     width: 100%;
     padding: .5rem;
     margin-bottom: .8rem;
@@ -69,7 +69,7 @@ footer{
     font-size: .75rem;
 }
 
-.form form input[type=button]{
+.form form input[type=submit] {
     background: var(--blue-color);
     color: white;
 }
