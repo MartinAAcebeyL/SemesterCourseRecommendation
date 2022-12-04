@@ -1,5 +1,7 @@
-{% url 'kardex' as kardex %}
-{% load static %}
+{% url 'kardex' as kardex %} 
+{% url 'horario_sugerido' as horario_sugerido %} 
+
+{%load static %}
 <section id="menu">
   <header>
     <img src="{% static 'images/estudiante1.jpg' %}" alt="estudiante" />
@@ -15,11 +17,13 @@
       <summary>Programaciones <i class="fa-solid fa-table"></i></summary>
       <ul>
         <li><a href="">Programarme</a></li>
-        <li><a href="">Horario Sugerido</a></li>
+        <li><a href="{{horario_sugerido}}">Horario Sugerido</a></li>
       </ul>
     </details>
     <details class="opciones">
-      <summary>Calificaciones <i class="fa-solid fa-pen-to-square"></i></summary>
+      <summary>
+        Calificaciones <i class="fa-solid fa-pen-to-square"></i>
+      </summary>
       <ul>
         <li><a href="{{kardex}}">Kardex</a></li>
       </ul>

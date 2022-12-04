@@ -15,7 +15,7 @@ class Horarios(models.Model):
     tipo = models.CharField(max_length=3,
                             choices=TipoMateria.choices,
                             default=TipoMateria.teoria)
-
+    grupo = models.IntegerField(default=11)
     # llaves foreneas
     docente = models.ForeignKey(
         Docentes, on_delete=models.CASCADE, related_name='horarios')

@@ -1,6 +1,7 @@
 from django.urls import path
-from .views import kardex
+from .views import kardex, horario_sugerido
 
 urlpatterns = [
     path('kardex/', kardex, name='kardex'),
+    path('horario/sugerido/', horario_sugerido, name='horario_sugerido'),
 ]
