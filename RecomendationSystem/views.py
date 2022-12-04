@@ -24,9 +24,6 @@ def login_view(request):
 
 def inicio(request):
     user = Alumnos.get_by_email(request.user.email)
-    print(user)
-    print(user.carrera)
-    print(user.name)
 
     return render(request, 'base.html',context={
         "user":user

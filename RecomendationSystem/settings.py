@@ -68,7 +68,9 @@ ROOT_URLCONF = 'RecomendationSystem.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates',],
+        'DIRS': ['templates',
+                 os.path.join(BASE_DIR, 'alumnos', 'templates', 'alumnos'),
+                 ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -92,7 +94,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': config('NAME'),
         'USER': 'root',
-        'PASSWORD':config('PASSWORD'),
+        'PASSWORD': config('PASSWORD'),
         'HOST': config('HOST'),
         'PORT': config('PORT'),
     }

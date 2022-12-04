@@ -21,5 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', login_view, name='login'),
     path('inicio/', inicio, name='inicio'),
-
+    path('estudiante/', include('apps.alumnos.urls'))
 ]

@@ -15,8 +15,9 @@ body {
     margin: 0;
     background: var(--font-color);
 }
+
 /* navar */
-#img-estudiante{
+#img-estudiante {
     width: 1.8rem;
     border-radius: 50%;
 }
@@ -31,16 +32,16 @@ body {
     padding: .7rem 1rem;
 }
 
-#nav *{
+#nav * {
     display: flex;
     align-items: center;
 }
 
-#nav :first-child{
+#nav :first-child {
     font-size: 1.2rem;
 }
 
-#nav :first-child:first-child{
+#nav :first-child:first-child {
     margin-right: 5rem;
 }
 
@@ -49,43 +50,80 @@ body {
     align-items: center;
 }
 
-#nav :last-child :first-child{
+#nav :last-child :first-child {
     margin-right: 1rem;
 }
 
 /* menu */
 
-#menu{
+#menu {
     width: 15%;
     padding: 1rem .5rem 0rem 1.2rem;
     background: var(--white-color);
     min-height: 90vh;
 }
 
-#menu header{
+#menu header {
     display: flex;
     align-items: center;
     font-size: .8rem;
 }
 
-#menu header img{
+#menu header img {
     width: 2.4rem;
     border-radius: 50%;
     margin-right: .8rem;
 }
 
-#menu > p{
+#menu>p {
     font-size: 0.8rem;
     text-align: center;
 }
 
-ul{
+ul {
     list-style: circle outside;
     margin: .5rem auto;
     margin-bottom: .8rem;
 }
 
-a{
+a {
     text-decoration: none;
     color: black;
+}
+
+
+#content {
+    display: flex;
+}
+
+.container-kardex {
+    margin: 0.5rem 1rem;
+    width: 100%;
+}
+
+.container-kardex #header {
+    background-color: var(--white-color);
+    padding: .5rem 1.2rem;
+    border-top: .2rem solid #367FA9;
+    border-radius: .3rem;
+}
+
+.container-kardex #header p {
+    margin: .5rem auto;
+    margin-left: 0;
+}
+
+.container-kardex #header table, #notas table {
+    width: 100%;
+}
+
+.fondo-opaco {
+    background-color: var(--font-color);
+}
+
+.container-kardex #notas {
+    background-color: var(--white-color);
+    padding: .5rem 1.2rem;
+    border-top: .2rem solid #F39C12;
+    border-radius: .3rem;
 }

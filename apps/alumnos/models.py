@@ -8,6 +8,7 @@ from apps.horarios.models import Horarios
 
 
 class Alumnos(Usuarios):
+    cu = models.IntegerField(default=111)
     kardex = models.OneToOneField(
         Kadex,
         on_delete=models.CASCADE,
@@ -15,7 +16,7 @@ class Alumnos(Usuarios):
     )
     carrera = models.ForeignKey(
         Carreras, on_delete=models.CASCADE, related_name='alumnos')
-    
+
     horarios = models.ManyToManyField(Horarios)
 
     @classmethod

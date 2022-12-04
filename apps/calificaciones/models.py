@@ -19,7 +19,7 @@ class Calificaciones(models.Model):
         default=Gestion.primero, choices=Gestion.choices)
     final = models.IntegerField()
     segunda_instancia = models.IntegerField(null=True, blank=True)
-    estado = models.CharField(max_length=2,
+    estado = models.CharField(max_length=15,
                               choices=EstadoMateria.choices,
                               default=EstadoMateria.aprobado)
 
