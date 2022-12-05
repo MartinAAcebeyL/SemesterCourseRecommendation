@@ -5,7 +5,8 @@ from .models import Horarios
 
 
 class HorariosAdmin(admin.ModelAdmin):
-    list_display = ('id', 'materia', 'aula', 'tipo', 'docente','grupo')
+    list_display = ('id', 'materia',
+                    'aula', 'tipo', 'docente', 'grupo')
 
 
 admin.site.register(Horarios, HorariosAdmin)

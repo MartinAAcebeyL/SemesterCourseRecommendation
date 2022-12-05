@@ -20,6 +20,11 @@ class Horarios(models.Model):
     docente = models.ForeignKey(
         Docentes, on_delete=models.CASCADE, related_name='horarios')
 
-
     materia = models.ForeignKey(
         Materias, on_delete=models.CASCADE, related_name='horarios')
+
+    def __str__(self) -> str:
+        return f"{self.id} {self.materia}"
+
+    def __repr__(self) -> str:
+        return f"<{self.id} {self.materia}>"

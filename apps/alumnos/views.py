@@ -19,15 +19,24 @@ def kardex(request):
 
 def horario_sugerido(request):
     user = Alumnos.get_by_email(request.user.email)
+    #recojo las calificaciones de alumno, las cuales aprobo.
     calificaciones = Calificaciones.objects.filter(
         kardex=user.kardex.id, estado='ap')
-    
+
+    #en este array guardo las materias aprobadas 
     materias_aprobadas = []
 
     for i in calificaciones:
         materias_aprobadas.append(i.materia)
 
-    materias_habilitadas_ = materias_habilitadas(materias_aprobadas)
+    #materias que puede llevar
+    materias_habilitadas_ = materias_habilitadas(materias_aprobadas)[:-3]
+
+    for i in materias_habilitadas_:
+        print(i)
+    print()
+    horarios = conjunto_horarios(materias_habilitadas_)
+
 
     return render(request, 'horario.html', context={
         "user": user,
