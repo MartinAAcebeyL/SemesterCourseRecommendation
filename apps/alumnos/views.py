@@ -32,9 +32,8 @@ def horario_sugerido(request):
     #materias que puede llevar
     materias_habilitadas_ = materias_habilitadas(materias_aprobadas)[:-3]
 
-    for i in materias_habilitadas_:
-        print(i)
-    print()
+    # for i in materias_habilitadas_:
+        # print(i)
     horarios = conjunto_horarios(materias_habilitadas_)
 
 
