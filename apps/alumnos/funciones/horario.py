@@ -41,13 +41,14 @@ def conjunto_horarios(materias_habilitadas: Materias):
     # diccionario con materia y lista de horarios
     # {"materia":[lista de horarios de materia]}
     diccionario_horarios = crear_dict(horarios_sugeridos, materias_habilitadas)
+    mostart_dict(diccionario_horarios)
     primer_f = primer_filtro(diccionario_horarios)
 
     if primer_f:
         comparar_horarios2(primer_f, diccionario_horarios)
         dict_horarios_2x2 = crear_dict_lst2x2(primer_f)
         diccionario_horarios.update(dict_horarios_2x2)
-        mostart_dict(diccionario_horarios)
+        # mostart_dict(diccionario_horarios)
         return diccionario_horarios
 
     # mostart_dict(diccionario_horarios)

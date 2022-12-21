@@ -27,4 +27,4 @@ class Horarios(models.Model):
         return f"{self.id} {self.materia}"
 
     def __repr__(self) -> str:
-        return f"<{self.id} {self.materia}>"
+        return f"<{self.materia} Grupo:{self.grupo} {self.posicion_horaria}>"

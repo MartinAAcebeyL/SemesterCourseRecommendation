@@ -1,4 +1,11 @@
 {% extends 'base.html' %} 
 {% block content %}
-    
+
+<ul style="display: block;">
+    {% for key, value in horarios.items %} 
+      <li>{{key}} - {{value}}</li>
+
+    {% endfor %}
+</ul>
+
 {% endblock %}
