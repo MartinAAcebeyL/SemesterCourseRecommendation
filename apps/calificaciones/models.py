@@ -5,6 +5,7 @@ from apps.materia.models import Materias
 
 
 class Calificaciones(models.Model):
+    id = models.BigAutoField(primary_key=True)
     class Gestion(models.IntegerChoices):
         primero = 1, 'primero'
         segundo = 2, 'Reprobado'
@@ -14,7 +15,7 @@ class Calificaciones(models.Model):
         reprobado = 'rp', 'Reprobado'
         convalidado = 'co', 'Convalidado'
 
-    anio = models.IntegerField(null=True, blank=True)
+    anio = models.IntegerField(null=True, blank=True, default=2022)
     gestion = models.IntegerField(
         default=Gestion.primero, choices=Gestion.choices)
     final = models.IntegerField()
@@ -25,5 +26,4 @@ class Calificaciones(models.Model):
 
     # relaciones
     kardex = models.ForeignKey(Kadex, on_delete=models.CASCADE)
-    materia = models.OneToOneField(
-        Materias, on_delete=models.CASCADE, primary_key=True)
+    materia = models.ForeignKey(Materias, on_delete=models.CASCADE)
