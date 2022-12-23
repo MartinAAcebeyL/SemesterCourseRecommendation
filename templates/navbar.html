@@ -1,3 +1,4 @@
+{% url 'logout' as logout %}
 {% load static %}
 <nav id="nav">
   <section id="suniver">
@@ -6,12 +7,16 @@
   </section>
   <section id="estudiante">
     <div>
-      <img id="img-estudiante" src="{% static 'images/estudiante1.jpg' %}" alt="estudiante" />
+      <img
+        id="img-estudiante"
+        src="{% static 'images/estudiante1.jpg' %}"
+        alt="estudiante"
+      />
       <span>{{user.name}}</span>
     </div>
     <div>
       <i class="fa-solid fa-gears"></i>
-      <span>carreras</span>
+      <a href="{{logout}}">Cerrar sesion</a>
     </div>
   </section>
 </nav>
