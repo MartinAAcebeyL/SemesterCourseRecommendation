@@ -1,14 +1,13 @@
-from apps.materia.models import Materias
-from apps.alumnos.models import Alumnos
-from apps.horarios.models import Horarios
+from . import *
+from .auxiliares import mostart_dict, crear_dict, generar_dict_r, extraer_pos_horaria_horario2x2, materias_eljidas
 
 
 def materias_habilitadas(materias_aprobadas: Materias):
-    # devuelve una lista con las materias habilitadas
+    # devuelve una LISTA con las materias que el alumno puede llevar
 
     # todas las materias
     materias_restantes = set(Materias.objects.all())
-    # todas lasmaterias que faltan llevar
+    # todas las materias que faltan llevar
     materias_restantes = list(
         materias_restantes.difference(set(materias_aprobadas)))
 
@@ -20,52 +19,45 @@ def materias_habilitadas(materias_aprobadas: Materias):
         # si x es subconjunto de y
         if x.issuperset(y):
             materias_abiertas.append(i)
-
     return materias_abiertas
 
 # main para devolver horarios
 
 
 def conjunto_horarios(materias_habilitadas: Materias):
-    # materias_habilitadas --> lista de materias
+    """devuele un diccionario con las materias y los horarios sugeridos
+    diccionario con materia y lista de horarios sugeridas, sin choques"""
+    dict_r = {}
 
-    # horarios de materias habilitadas
-    horarios_sugeridos = []
-    # todos los horarios
+    """horarios de materias habilitadas"""
+    horarios_habilitados = []
+
+    """todos los horarios"""
     horarios = Horarios.objects.all()
 
     for horario in horarios:
         if horario.materia in materias_habilitadas:
-            horarios_sugeridos.append(horario)
+            horarios_habilitados.append(horario)
 
-    # diccionario con materia y lista de horarios
-    # {"materia":[lista de horarios de materia]}
-    diccionario_horarios = crear_dict(horarios_sugeridos, materias_habilitadas)
+    """diccionario con materia y lista de horarios
+    {"materia":[lista de horarios de materia]}"""
+    diccionario_horarios = crear_dict(
+        horarios_habilitados, materias_habilitadas)
+
+    print("*"*100)
+    """copias de las materias habilitadas y el diccionario de horarios"""
+    materias_habilitadas_copy = materias_habilitadas.copy()
+    diccionario_horarios_copy = diccionario_horarios.copy()
+    """lista de las materias habilitadas con menor curso"""
+    materias = materias_eljidas(materias_habilitadas_copy)
     mostart_dict(diccionario_horarios)
-    primer_f = primer_filtro(diccionario_horarios)
 
-    if primer_f:
-        choques = comparar_horarios2(primer_f, diccionario_horarios)
-        dict_horarios_2x2 = crear_dict_lst2x2(primer_f)
-        diccionario_horarios.update(dict_horarios_2x2)
-        # mostart_dict(diccionario_horarios)
-        return diccionario_horarios
+    dict_r.update(generar_dict_r(materias, diccionario_horarios_copy))
 
-    # mostart_dict(diccionario_horarios)
-
-
-def crear_dict_lst2x2(lst2x2):
-    res = {}
-    for item in lst2x2:
-        sigla = item[0].materia.sigla
-        res[sigla] = item
-    return res
-
-
-def mostart_dict(dic: dict):
-    print()
-    for i in dic:
-        print(f"{i}\t{dic.get(i)}")
+    print("*"*100)
+    mostart_dict(dict_r)
+    mostart_dict(diccionario_horarios_copy)
+    return dict_r
 
 
 def comparar_horarios2(lista_2x2: list, dict_materias: dict):
@@ -95,33 +87,6 @@ def comparar_horarios2(lista_2x2: list, dict_materias: dict):
         dict_materias[i] = lista_horarios
         choques[i] = lst_choques
     return choques
-
-
-def extraer_pos_horaria_horario2x2(lst_2x2: list):
-    l = []
-    for item in lst_2x2:
-        for i in item:
-            l.append(i.posicion_horaria)
-    return l
-
-
-def crear_dict(horarios: Horarios, materias: Materias):
-    # retorna dicciona con las materias
-    diccionario_horarios = {}
-
-    for materia in materias:
-        diccionario_horarios[materia.nombre] = crear_list(horarios, materia)
-
-    return diccionario_horarios
-
-
-def crear_list(horarios: Horarios, materia: Materias):
-    # devuelve una lista con materias habilitadas
-    l = []
-    for horario in horarios:
-        if horario.materia == materia:
-            l.append(horario)
-    return l
 
 
 def primer_filtro(horarios_dict: dict):
