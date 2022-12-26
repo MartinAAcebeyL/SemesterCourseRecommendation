@@ -1,5 +1,5 @@
 from . import *
-from .auxiliares import crear_dict, generar_dict_r, materias_eljidas
+from .auxiliares import crear_dict, generar_dict_r, materias_eljidas, mostart_dict
 
 
 def materias_habilitadas(materias_aprobadas: Materias):
@@ -27,7 +27,7 @@ def materias_habilitadas(materias_aprobadas: Materias):
 def conjunto_horarios(materias_habilitadas: Materias):
     """devuele un diccionario con las materias y los horarios sugeridos
     diccionario con materia y lista de horarios sugeridas, sin choques"""
-    dict_r = {}
+    dict_recomendacion = {}
 
     """horarios de materias habilitadas"""
     horarios_habilitados = []
@@ -50,7 +50,28 @@ def conjunto_horarios(materias_habilitadas: Materias):
     while diccionario_horarios_copy:
         """lista de las materias habilitadas con menor curso"""
         materias = materias_eljidas(materias_habilitadas_copy)
-        dict_r.update(generar_dict_r(
+        dict_recomendacion.update(generar_dict_r(
             materias, diccionario_horarios_copy, materias_habilitadas_copy))
         materias = materias_eljidas(materias_habilitadas_copy)
-    return dict_r
+    
+    return generar_dict_total(dict_recomendacion, diccionario_horarios)
+
+
+def generar_dict_total(dict_recomendacion, diccionario_horarios):
+    """genera un diccionario con todas las materias y sus horarios
+    separandolos con los horarios sugeridos"""
+    print("*"*150)
+    dict_total = {}
+    for materia_horarios in diccionario_horarios:
+        horarios_dict_horarios = diccionario_horarios.get(materia_horarios)
+        horarios_dict_recomendacion = dict_recomendacion.get(materia_horarios)
+        lst_aux = []
+        for horario in horarios_dict_horarios:
+            if horario in horarios_dict_recomendacion:
+                lst_aux.append((horario, True))
+            else:
+                lst_aux.append((horario, False))
+        dict_total[materia_horarios] = lst_aux
+
+
+    return dict_total
