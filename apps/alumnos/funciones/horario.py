@@ -34,7 +34,7 @@ def conjunto_horarios(materias_habilitadas: Materias):
 
     """todos los horarios"""
     horarios = Horarios.objects.all()
-
+    """recolecion de horarios habilitados """
     for horario in horarios:
         if horario.materia in materias_habilitadas:
             horarios_habilitados.append(horario)
@@ -44,19 +44,15 @@ def conjunto_horarios(materias_habilitadas: Materias):
     diccionario_horarios = crear_dict(
         horarios_habilitados, materias_habilitadas)
 
-    print("*"*100)
     """copias de las materias habilitadas y el diccionario de horarios"""
     materias_habilitadas_copy = materias_habilitadas.copy()
     diccionario_horarios_copy = diccionario_horarios.copy()
-    """lista de las materias habilitadas con menor curso"""
-    materias = materias_eljidas(materias_habilitadas_copy)
-    mostart_dict(diccionario_horarios)
-
-    dict_r.update(generar_dict_r(materias, diccionario_horarios_copy))
-
-    print("*"*100)
-    mostart_dict(dict_r)
-    mostart_dict(diccionario_horarios_copy)
+    while diccionario_horarios_copy:
+        """lista de las materias habilitadas con menor curso"""
+        materias = materias_eljidas(materias_habilitadas_copy)
+        dict_r.update(generar_dict_r(
+            materias, diccionario_horarios_copy, materias_habilitadas_copy))
+        materias = materias_eljidas(materias_habilitadas_copy)
     return dict_r
 
 

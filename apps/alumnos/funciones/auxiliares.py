@@ -115,7 +115,7 @@ def dict_lst_choques(main_grupos, diccionario_horarios_copy, materia):
         grupo = [j for j in diccionario_horarios_copy.get(
             materia.nombre) if j.grupo == i]
 
-        print(f"grupo: {grupo[0].grupo}")
+        # print(f"grupo: {grupo[0].grupo}")
         cont = 0
         for j in grupo:
             for aux in diccionario_horarios_copy:
@@ -125,8 +125,8 @@ def dict_lst_choques(main_grupos, diccionario_horarios_copy, materia):
                 lst_horarios = diccionario_horarios_copy.get(aux)
                 for horario in lst_horarios:
                     if j.posicion_horaria == horario.posicion_horaria:
-                        print(
-                            f"{j.materia.nombre} choca con {horario.materia.nombre} G{horario.grupo} en la posicion {j.posicion_horaria}")
+                        # print(
+                            # f"{j.materia.nombre} choca con {horario.materia.nombre} G{horario.grupo} en la posicion {j.posicion_horaria}")
                         lst_choques_aux.append(horario.grupo)
                         dict_choques_aux[horario.materia.nombre] = lst_choques_aux
                         cont += 1
@@ -137,10 +137,11 @@ def dict_lst_choques(main_grupos, diccionario_horarios_copy, materia):
     return dict_choques, lst_choques
 
 
-def generar_dict_r(materias, diccionario_horarios_copy):
+def generar_dict_r(materias, diccionario_horarios_copy, materias_habilitadas_copy):
     dict_r = {}
     for materia in materias:
-        print(materia.nombre.center(30, "-"))
+        materias_habilitadas_copy.remove(materia)
+        # print(materia.nombre.center(30, "-"))
         lst_horarios = diccionario_horarios_copy.get(materia.nombre)
         """grupos que tiene la materia
         por ejemplo: [9,8,7]"""
@@ -157,14 +158,14 @@ def generar_dict_r(materias, diccionario_horarios_copy):
             main_grupos, diccionario_horarios_copy, materia)
 
         cant_min_choques = min(lst_choques)
-        print(f"lista de choques: {lst_choques}")
+        # print(f"lista de choques: {lst_choques}")
         if cant_min_choques == 0:
-            print(f"cantidad minima de choques {cant_min_choques}")
+            # print(f"cantidad minima de choques {cant_min_choques}")
             lst_horarios = []
             for i in range(len(lst_choques)):
                 if lst_choques[i] == 0:
                     grupo = main_grupos[i]
-                    print(f"grupo {grupo} a agregar")
+                    # print(f"grupo {grupo} a agregar")
                     horarios_temp = Horarios.objects.filter(
                         materia=materia, grupo=grupo)
                     for horario in horarios_temp:
@@ -173,8 +174,8 @@ def generar_dict_r(materias, diccionario_horarios_copy):
             dict_r[materia.nombre] = lst_horarios
             # del (diccionario_horarios_copy[materia.nombre])
         else:
-            print(
-                f"El grupo con menos choques es {main_grupos[lst_choques.index(cant_min_choques)]} con {cant_min_choques} choques")
+            # print(
+                # f"El grupo con menos choques es {main_grupos[lst_choques.index(cant_min_choques)]} con {cant_min_choques} choques")
 
             indice = lst_choques.index(cant_min_choques)
             grupo_agregar = main_grupos[indice]
