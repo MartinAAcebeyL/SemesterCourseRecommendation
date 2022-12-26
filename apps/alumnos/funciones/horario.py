@@ -1,5 +1,5 @@
 from . import *
-from .auxiliares import mostart_dict, crear_dict, generar_dict_r, extraer_pos_horaria_horario2x2, materias_eljidas
+from .auxiliares import crear_dict, generar_dict_r, materias_eljidas
 
 
 def materias_habilitadas(materias_aprobadas: Materias):
@@ -54,41 +54,3 @@ def conjunto_horarios(materias_habilitadas: Materias):
             materias, diccionario_horarios_copy, materias_habilitadas_copy))
         materias = materias_eljidas(materias_habilitadas_copy)
     return dict_r
-
-
-def comparar_horarios2(lista_2x2: list, dict_materias: dict):
-    # elimina materias con choques de lista_2x2 en dict_materias
-    # y retorna un diccionario con las materias que tienen choques
-    choques = {}
-
-    for lista in lista_2x2:
-        nombre = lista[0].materia.nombre
-        dict_materias.pop(nombre)
-
-    lst_pos_horaria = extraer_pos_horaria_horario2x2(lista_2x2)
-    for i in dict_materias:
-        lista_horarios = dict_materias.get(i)
-        lst_choques = []
-        for item_horaraio in lista_horarios:
-            posicion_horaria_actual = item_horaraio.posicion_horaria
-            if posicion_horaria_actual in lst_pos_horaria:
-                # significa que hay choque
-                grupo = item_horaraio.grupo
-                lst_choques.append(item_horaraio)
-                lista_horarios.remove(item_horaraio)
-                for j in lista_horarios:
-                    if j.grupo == grupo:
-                        lst_choques.append(j)
-                        lista_horarios.remove(j)
-        dict_materias[i] = lista_horarios
-        choques[i] = lst_choques
-    return choques
-
-
-def primer_filtro(horarios_dict: dict):
-    # 1er filtro donde devuelve las meterias que puede llevar
-    list_2_horarios = []
-    for horario in horarios_dict.values():
-        if len(horario) == 2:
-            list_2_horarios.append(horario)
-    return list_2_horarios

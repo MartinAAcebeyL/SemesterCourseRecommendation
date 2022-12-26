@@ -25,44 +25,7 @@ def crear_list(horarios: Horarios, materia: Materias):
             l.append(horario)
     return l
 
-
-def crear_dict_lst2x2(lst2x2):
-    res = {}
-    for item in lst2x2:
-        sigla = item[0].materia.sigla
-        res[sigla] = item
-    return res
-
-
-def extraer_pos_horaria_horario2x2(lst_2x2: list):
-    l = []
-    for item in lst_2x2:
-        for i in item:
-            l.append(i.posicion_horaria)
-    return l
-
 #
-
-
-def extraer_materias_lab(materias: Materias):
-    # devuelve una lista con las materias que tienen laboratorio
-    materias_lab = []
-    for materia in materias:
-        if materia.tiene_lab:
-            materias_lab.append(materia)
-    return materias_lab
-
-
-def separar_teo_lab(horarios: Horarios):
-    # devuelve una lista con los horarios de teoria y otra con los de laboratorio
-    horarios_teo = []
-    horarios_lab = []
-    for horario in horarios:
-        if horario.tipo == "teo":
-            horarios_teo.append(horario)
-        else:
-            horarios_lab.append(horario)
-    return horarios_teo, horarios_lab
 
 
 def extraer_menor_curso(materias_habilitadas: Materias):
@@ -126,7 +89,7 @@ def dict_lst_choques(main_grupos, diccionario_horarios_copy, materia):
                 for horario in lst_horarios:
                     if j.posicion_horaria == horario.posicion_horaria:
                         # print(
-                            # f"{j.materia.nombre} choca con {horario.materia.nombre} G{horario.grupo} en la posicion {j.posicion_horaria}")
+                        # f"{j.materia.nombre} choca con {horario.materia.nombre} G{horario.grupo} en la posicion {j.posicion_horaria}")
                         lst_choques_aux.append(horario.grupo)
                         dict_choques_aux[horario.materia.nombre] = lst_choques_aux
                         cont += 1
@@ -175,7 +138,7 @@ def generar_dict_r(materias, diccionario_horarios_copy, materias_habilitadas_cop
             # del (diccionario_horarios_copy[materia.nombre])
         else:
             # print(
-                # f"El grupo con menos choques es {main_grupos[lst_choques.index(cant_min_choques)]} con {cant_min_choques} choques")
+            # f"El grupo con menos choques es {main_grupos[lst_choques.index(cant_min_choques)]} con {cant_min_choques} choques")
 
             indice = lst_choques.index(cant_min_choques)
             grupo_agregar = main_grupos[indice]
