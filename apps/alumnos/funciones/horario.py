@@ -53,14 +53,13 @@ def conjunto_horarios(materias_habilitadas: Materias):
         dict_recomendacion.update(generar_dict_r(
             materias, diccionario_horarios_copy, materias_habilitadas_copy))
         materias = materias_eljidas(materias_habilitadas_copy)
-    
+
     return generar_dict_total(dict_recomendacion, diccionario_horarios)
 
 
 def generar_dict_total(dict_recomendacion, diccionario_horarios):
     """genera un diccionario con todas las materias y sus horarios
     separandolos con los horarios sugeridos"""
-    print("*"*150)
     dict_total = {}
     for materia_horarios in diccionario_horarios:
         horarios_dict_horarios = diccionario_horarios.get(materia_horarios)

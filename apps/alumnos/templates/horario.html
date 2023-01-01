@@ -1,11 +1,29 @@
-{% extends 'base.html' %} 
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 
-<ul style="display: block;">
-    {% for key, value in horarios.items %} 
-      <li>{{key}} - {{value}}</li>
+<div class="container-horario">
+  <table>
+    <thead>
+      <th colspan="5">Horarios</th>
+    </thead>
+    <thead>
+      <th>#</th>
+      <th>Sigla</th>
+      <th>Materia</th>
+      <th>Curso</th>
+      <th>Grupo teorico</th>
+      <th>Grupo practico</th>
+      <th>Grupo laboratorio</th>
+      <th></th>
+    </thead>
+    <tbody>
+      
+    </tbody>
+  </table>
 
+  <!-- <ul style="display: block">
+    {% for key, value in horarios.items %}
+    <li>{{key}} - {{value}}</li>
     {% endfor %}
-</ul>
-
+  </ul> -->
+</div>
 {% endblock %}

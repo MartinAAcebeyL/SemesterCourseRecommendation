@@ -113,7 +113,8 @@ a {
     margin-left: 0;
 }
 
-.container-kardex #header table, #notas table {
+.container-kardex #header table,
+#notas table {
     width: 100%;
 }
 
@@ -126,4 +127,9 @@ a {
     padding: .5rem 1.2rem;
     border-top: .2rem solid #F39C12;
     border-radius: .3rem;
+}
+
+/* kardex */
+.container-horario {
+    width: 90%;
 }
