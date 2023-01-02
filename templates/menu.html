@@ -1,5 +1,6 @@
 {% url 'kardex' as kardex %} 
-{% url 'horario_sugerido' as horario_sugerido %} 
+{% url 'horario_sugerido' as horario_sugerido %}
+{% url 'mis_programaciones' as mis_programaciones %}
 
 {%load static %}
 <section id="menu">
@@ -16,8 +17,8 @@
     <details class="opciones">
       <summary>Programaciones <i class="fa-solid fa-table"></i></summary>
       <ul>
-        <li><a href="">Programarme</a></li>
-        <li><a href="{{horario_sugerido}}">Horario Sugerido</a></li>
+        <li><a href="{{mis_programaciones}}">Mis Programaciones</a></li>
+        <li><a href="{{horario_sugerido}}">Programarme</a></li>
       </ul>
     </details>
     <details class="opciones">

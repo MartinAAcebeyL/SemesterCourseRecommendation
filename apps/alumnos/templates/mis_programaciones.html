@@ -1,0 +1,61 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="container-horario">
+  <h2>Programaciones</h2>
+  <section class="header">
+    <p>Datos generales</p>
+    <table>
+      <tr class="fondo-opaco">
+        <td>Carnet universitario</td>
+        <td>{{user.cu}}</td>
+      </tr>
+      <tr>
+        <td>Carrera</td>
+        <td>{{user.carrera}}</td>
+      </tr>
+      <tr class="fondo-opaco">
+        <td>Universitario</td>
+        <td>{{user.name}} {{user.last_name}}</td>
+      </tr>
+    </table>
+  </section>
+  <br />
+  <section class="notas">
+    <p>Programaciones</p>
+
+    <form action="{% url 'mis_programaciones' %}" method="post">
+      {% csrf_token %} {% for i in programaciones%}
+      <button type="submit" name="gestion" value="{{i}}">{{i}}</button>
+      {% endfor %}
+    </form><br>
+    <table>
+      <thead>
+        <th>Sigla</th>
+        <th>Materia</th>
+        <th>Curso</th>
+        <th>Grupo teorico</th>
+        <th>Grupo laboratorio</th>
+        <th></th>
+      </thead>
+
+      <tbody>
+        {%for materia in horarios%}
+        <tr>
+          <td>{{materia.sigla}}</td>
+          <td>{{materia.nombre}}</td>
+          <td>{{materia.curso}}</td>
+          {%if materia.lab %}
+          <td>{{materia.grupo_teo}}</td>
+          <td>{{materia.grupo_lab}}</td>
+          {%else%}
+          <td>{{materia.grupo_teo}}</td>
+          <td></td>
+          {%endif%}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+  <script type=""></script>
+</div>
+{% endblock %}

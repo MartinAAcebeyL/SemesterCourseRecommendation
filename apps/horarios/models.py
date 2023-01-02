@@ -24,7 +24,7 @@ class Horarios(models.Model):
         Materias, on_delete=models.CASCADE, related_name='horarios')
 
     def __str__(self) -> str:
-        return f"{self.materia} G{self.grupo} {self.posicion_horaria}"
+        return f"{self.materia} G{self.grupo}"
 
     def __repr__(self) -> str:
         return f"<{self.materia} Grupo:{self.grupo} {self.posicion_horaria}>"

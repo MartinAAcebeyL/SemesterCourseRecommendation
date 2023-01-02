@@ -41,7 +41,7 @@
             <td>{{materia.curso}}</td>
             {%if materia.lab %}
             <td>
-              <select name="{{materia.sigla}}">
+              <select name="{{materia.nombre}}">
                 <option value="{{i.0}}">-----</option>
                 {%for i in materia.grupos%} {%if i.1%}
                 <option value="{{i.0}}">{{i.0}}</option>
@@ -53,7 +53,7 @@
               </select>
             </td>
             <td>
-              <select name="{{materia.sigla}}">
+              <select name="{{materia.nombre}}">
                 <option value="{{i.0}}">-----</option>
                 {%for i in materia.grupos%} {%if i.1%}
                 <option value="{{i.0}}">{{i.0}}</option>
@@ -66,8 +66,8 @@
             </td>
             {%else%}
             <td>
-              <select name="{{materia.sigla}}">
-                <option value="{{materia.sigla}}">-----</option>
+              <select name="{{materia.nombre}}">
+                <option value="">-----</option>
                 {%for i in materia.grupos%} {%if i.1%}
                 <option value="{{i.0}}">{{i.0}}</option>
                 {%else%}
@@ -85,7 +85,7 @@
         <tfoot>
           <tr>
             <td colspan="6">
-              <button class="btn btn-primary">Guardar</button>
+              <button class="btn btn-primary">Programarme</button>
             </td>
           </tr>
         </tfoot>

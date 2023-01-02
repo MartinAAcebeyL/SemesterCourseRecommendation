@@ -1,0 +1,27 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="container-horario">
+  <h2>Programacion</h2>
+  <section class="header">
+    <p>Datos generales</p>
+    <table>
+      <tr class="fondo-opaco">
+        <td>Carnet universitario</td>
+        <td>{{user.cu}}</td>
+      </tr>
+      <tr>
+        <td>Carrera</td>
+        <td>{{user.carrera}}</td>
+      </tr>
+      <tr class="fondo-opaco">
+        <td>Universitario</td>
+        <td>{{user.name}} {{user.last_name}}</td>
+      </tr>
+    </table>
+  </section>
+  <br />
+  <section class="notas">
+    <p>{{message}}</p>
+  </section>
+</div>
+{% endblock %}

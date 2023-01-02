@@ -8,7 +8,7 @@ class Calificaciones(models.Model):
     id = models.BigAutoField(primary_key=True)
     class Gestion(models.IntegerChoices):
         primero = 1, 'primero'
-        segundo = 2, 'Reprobado'
+        segundo = 2, 'segundo'
 
     class EstadoMateria(models.TextChoices):
         aprobado = 'ap', 'Aprobado'

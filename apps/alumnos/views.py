@@ -1,8 +1,11 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, redirect
 from .models import Alumnos
 from apps.calificaciones.models import Calificaciones
 from apps.materia.models import Materias
+from apps.horarios.models import Horarios
+from apps.programaciones.models import Programaciones
 from .funciones.horario import *
+from datetime import datetime
 # Create your views here.
 
 
@@ -18,8 +21,19 @@ def kardex(request):
 
 
 def horario_sugerido(request):
-
     user = Alumnos.get_by_email(request.user.email)
+    fecha = (str(datetime.now()).split(" ")[0]).split("-")[:2]
+    anio = int(fecha[0])
+    gestion = 1 if int(fecha[1]) < 6 else 2
+    programaciones = Programaciones.objects.filter(
+        alumno_id=user, anio=anio, gestion=gestion)
+    if programaciones:
+        return render(request, 'horario_existente.html', context={
+            "user": user,
+            "message": "Ya tienes un horario programado"
+        })
+
+    print(programaciones)
     # recojo las calificaciones de alumno, las cuales aprobo.
     calificaciones = Calificaciones.objects.filter(
         kardex=user.kardex.id, estado='ap')
@@ -64,8 +78,92 @@ def horario_sugerido(request):
 
 
 def programarse(request):
-    print(request)
-    print(request.POST)     
+    user = Alumnos.get_by_email(request.user.email)
+    fecha = (str(datetime.now()).split(" ")[0]).split("-")[:2]
+
+    anio = int(fecha[0])
+    gestion = 1 if int(fecha[1]) < 6 else 2
+
+    dict_request = dict(request.POST).copy()
+    del dict_request['csrfmiddlewaretoken']
+
+    lst_materias = []
+    for i in dict_request:
+        materia = Materias.objects.filter(nombre=i)
+        lst_materias.append(*materia)
+
+    for i, j in zip(dict_request, lst_materias):
+        horario = dict_request.get(i)
+        if len(horario) == 1:
+            aux_insert = Horarios.objects.filter(
+                materia=j, grupo=horario[0])
+            h = Programaciones(anio=anio, gestion=gestion,
+                               alumno=user)
+            h.save()
+            h.horarios.add(*aux_insert)
+
+        else:
+            lst_aux = []
+            materia_teo = Horarios.objects.filter(
+                materia=j, grupo=horario[0], tipo='teo').first()
+
+            materia_lab = Horarios.objects.filter(
+                materia=j, grupo=horario[1], tipo='lab').first()
+
+            lst_aux.append(materia_teo.id)
+            lst_aux.append(materia_lab.id)
+            h = Programaciones(anio=anio, gestion=gestion,
+                               alumno=user)
+            h.save()
+            h.horarios.add(*lst_aux)
+
+    return redirect('mis_programaciones')
 
 
-    return HttpResponse("programarse")
+def mis_programaciones(request):
+    user = Alumnos.get_by_email(request.user.email)
+
+    # programaciones
+    programaciones = Programaciones.objects.filter(
+        alumno=user).order_by('-anio', '-gestion')
+
+    lst_programaciones_anio_gestion = []
+    for i in programaciones:
+        lst_programaciones_anio_gestion.append(f"{i.gestion}/{i.anio}")
+
+    lst_programaciones_anio_gestion = list(
+        set(lst_programaciones_anio_gestion))
+
+    # print(lst_programaciones_anio_gestion)
+    programaciones = Programaciones.objects.filter(
+        alumno=user, anio=lst_programaciones_anio_gestion[0].split("/")[1], gestion=lst_programaciones_anio_gestion[0].split("/")[0])
+
+    if request.POST:
+        programaciones = request.POST.get('gestion')
+        gestion, anio = programaciones.split("/")
+        programaciones = Programaciones.objects.filter(
+            alumno=user, anio=anio, gestion=gestion)
+
+    lst_show = []
+    for i in programaciones:
+        dict_show = {}
+        horario = i.horarios.all()
+        dict_show["sigla"] = horario[0].materia.sigla
+        dict_show["nombre"] = horario[0].materia.nombre
+        dict_show["curso"] = horario[0].materia.curso
+        dict_show["lab"] = horario[0].materia.tiene_lab
+
+        if not horario[0].materia.tiene_lab:
+            dict_show["grupo_teo"] = horario[0].grupo
+            dict_show["grupo_lab"] = -1
+        else:
+            dict_show["grupo_teo"] = horario[0].grupo
+            dict_show["grupo_lab"] = horario[1].grupo
+
+        lst_show.append(dict_show)
+
+    return render(request, 'mis_programaciones.html', context={
+        "user": user,
+        "programaciones": lst_programaciones_anio_gestion,
+        "horarios": lst_show,
+    })
