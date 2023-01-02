@@ -65,7 +65,7 @@ def horario_sugerido(request):
 
 def programarse(request):
     print(request)
-    print(request.POST)
+    print(request.POST)     
 
 
     return HttpResponse("programarse")

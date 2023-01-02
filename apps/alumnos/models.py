@@ -9,6 +9,7 @@ from apps.horarios.models import Horarios
 
 class Alumnos(Usuarios):
     cu = models.IntegerField(default=111)
+    # relaciones
     kardex = models.OneToOneField(
         Kadex,
         on_delete=models.CASCADE,
