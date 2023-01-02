@@ -101,20 +101,20 @@ a {
     width: 100%;
 }
 
-.container-kardex #header {
+.header {
     background-color: var(--white-color);
     padding: .5rem 1.2rem;
     border-top: .2rem solid #367FA9;
     border-radius: .3rem;
 }
 
-.container-kardex #header p {
+.header p {
     margin: .5rem auto;
     margin-left: 0;
 }
 
-.container-kardex #header table,
-#notas table {
+.header table,
+.notas table {
     width: 100%;
 }
 
@@ -122,14 +122,31 @@ a {
     background-color: var(--font-color);
 }
 
-.container-kardex #notas {
+.notas {
     background-color: var(--white-color);
     padding: .5rem 1.2rem;
     border-top: .2rem solid #F39C12;
     border-radius: .3rem;
 }
 
-/* kardex */
+/* horario sugerido */
 .container-horario {
-    width: 90%;
+    width: 100%;
+    padding: 1rem;
+}
+
+.container-horario .notas table{
+    text-align: justify;
+}
+
+.container-horario .notas table button {
+    background-color: var(--blue-color);
+    color: var(--white-color);
+    border: none;
+    border-radius: .3rem;
+    padding: .3rem;
+    margin: .3rem;
+    cursor: pointer;
+
+    width: 100%;
 }

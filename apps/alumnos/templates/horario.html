@@ -1,29 +1,97 @@
 {% extends 'base.html' %} {% block content %}
 
 <div class="container-horario">
-  <table>
-    <thead>
-      <th colspan="5">Horarios</th>
-    </thead>
-    <thead>
-      <th>#</th>
-      <th>Sigla</th>
-      <th>Materia</th>
-      <th>Curso</th>
-      <th>Grupo teorico</th>
-      <th>Grupo practico</th>
-      <th>Grupo laboratorio</th>
-      <th></th>
-    </thead>
-    <tbody>
-      
-    </tbody>
-  </table>
-
-  <!-- <ul style="display: block">
-    {% for key, value in horarios.items %}
-    <li>{{key}} - {{value}}</li>
-    {% endfor %}
-  </ul> -->
+  <h2>Programacion</h2>
+  <section class="header">
+    <p>Datos generales</p>
+    <table>
+      <tr class="fondo-opaco">
+        <td>Carnet universitario</td>
+        <td>{{user.cu}}</td>
+      </tr>
+      <tr>
+        <td>Carrera</td>
+        <td>{{user.carrera}}</td>
+      </tr>
+      <tr class="fondo-opaco">
+        <td>Universitario</td>
+        <td>{{user.name}} {{user.last_name}}</td>
+      </tr>
+    </table>
+  </section>
+  <br />
+  <section class="notas">
+    <p>Horarios</p>
+    <table>
+      <thead>
+        <th>Sigla</th>
+        <th>Materia</th>
+        <th>Curso</th>
+        <th>Grupo teorico</th>
+        <th>Grupo laboratorio</th>
+        <th></th>
+      </thead>
+      <form action="{% url 'programacion' %}" method="post">
+        {% csrf_token %}
+        <tbody>
+          {%for materia in horarios%}
+          <tr>
+            <td>{{materia.sigla}}</td>
+            <td>{{materia.nombre}}</td>
+            <td>{{materia.curso}}</td>
+            {%if materia.lab %}
+            <td>
+              <select name="{{materia.sigla}}">
+                <option value="{{i.0}}">-----</option>
+                {%for i in materia.grupos%} {%if i.1%}
+                <option value="{{i.0}}">{{i.0}}</option>
+                {%else%}
+                <option value="{{i.0}}" style="color: red">
+                  {{i.0}}
+                </option>
+                {%endif%} {%endfor%}
+              </select>
+            </td>
+            <td>
+              <select name="{{materia.sigla}}">
+                <option value="{{i.0}}">-----</option>
+                {%for i in materia.grupos%} {%if i.1%}
+                <option value="{{i.0}}">{{i.0}}</option>
+                {%else%}
+                <option value="{{i.0}}" style="color: red">
+                  {{i.0}}
+                </option>
+                {%endif%} {%endfor%}
+              </select>
+            </td>
+            {%else%}
+            <td>
+              <select name="{{materia.sigla}}">
+                <option value="{{materia.sigla}}">-----</option>
+                {%for i in materia.grupos%} {%if i.1%}
+                <option value="{{i.0}}">{{i.0}}</option>
+                {%else%}
+                <option value="{{i.0}}" style="color: red">
+                  {{i.0}}
+                </option>
+                {%endif%} {%endfor%}
+              </select>
+            </td>
+            <td></td>
+            {%endif%}
+          </tr>
+          {% endfor %}
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="6">
+              <button class="btn btn-primary">Guardar</button>
+            </td>
+          </tr>
+        </tfoot>
+      </form>
+    </table>
+  </section>
+  <script type=""></script>
 </div>
 {% endblock %}
