@@ -27,13 +27,13 @@ def horario_sugerido(request):
     gestion = 1 if int(fecha[1]) < 6 else 2
     programaciones = Programaciones.objects.filter(
         alumno_id=user, anio=anio, gestion=gestion)
+
     if programaciones:
         return render(request, 'horario_existente.html', context={
             "user": user,
             "message": "Ya tienes un horario programado"
         })
 
-    print(programaciones)
     # recojo las calificaciones de alumno, las cuales aprobo.
     calificaciones = Calificaciones.objects.filter(
         kardex=user.kardex.id, estado='ap')
