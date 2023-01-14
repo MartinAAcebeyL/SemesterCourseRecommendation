@@ -94,6 +94,10 @@ def programarse(request):
 
     for i, j in zip(dict_request, lst_materias):
         horario = dict_request.get(i)
+
+        if not horario[0]:
+            continue
+
         if len(horario) == 1:
             aux_insert = Horarios.objects.filter(
                 materia=j, grupo=horario[0])
@@ -101,7 +105,6 @@ def programarse(request):
                                alumno=user)
             h.save()
             h.horarios.add(*aux_insert)
-
         else:
             lst_aux = []
             materia_teo = Horarios.objects.filter(
